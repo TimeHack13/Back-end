@@ -27,30 +27,32 @@ public class UsuarioCadastroService {
 			return Optional.empty();
 		}).orElseGet(() -> {
 			
-			List<Avaliacao> novaAvaliacao = new ArrayList<Avaliacao>();
-			
-			Usuario novoUsuario = new Usuario(novoUsuarioCadastro, novaAvaliacao);			
+			Usuario novoUsuario = new Usuario(novoUsuarioCadastro);			
 						
 			return Optional.ofNullable(usuarioRepository.save(novoUsuario));
 		});
 	}
 	
-	public Optional<UsuarioLoginDTO> logar(Optional<UsuarioLoginDTO> user) {
+	public Optional<UsuarioLoginDTO> logar(Optional<UsuarioLoginDTO> userLogin) {
 		
-		Optional<Usuario> cadastro = usuarioRepository.findByEmail(user.get().getEmail());
+		Optional<Usuario> usuario = usuarioRepository.findByEmail(userLogin.get().getEmail());
 
-		if (cadastro.isPresent()) {
-			if (user.get().getSenha() == cadastro.get().getSenha()) {
+		String valor1 = userLogin.get().getEmail();
+		String valor2 = usuario.get().getEmail();
+		
+		boolean verifica = valor1 == valor2;
 				
-				user.get().setNome(cadastro.get().getNome());
-				user.get().setId(cadastro.get().getId_usuario());
-				user.get().setEmail(cadastro.get().getEmail());
-
-				return user;
+		if (usuario.isPresent()) {
+			if (!verifica) {
+				
+				userLogin.get().setId(usuario.get().getId_usuario());
+				userLogin.get().setEmail(usuario.get().getEmail());
+				
+				return userLogin;
 			}
 		}
 		
-		return Optional.empty(); // login errado. seViraFront().
+		return Optional.empty();
 	}
 	
 }

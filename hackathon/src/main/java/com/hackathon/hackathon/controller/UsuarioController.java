@@ -19,6 +19,8 @@ import com.hackathon.hackathon.dto.UsuarioLoginDTO;
 import com.hackathon.hackathon.model.Avaliacao;
 import com.hackathon.hackathon.model.Empresa;
 import com.hackathon.hackathon.model.Usuario;
+import com.hackathon.hackathon.repository.AvaliacaoRepository;
+import com.hackathon.hackathon.repository.EmpresaRepository;
 import com.hackathon.hackathon.repository.UsuarioRepository;
 import com.hackathon.hackathon.service.UsuarioCadastroService;
 import com.hackathon.hackathon.service.UsuarioService;
@@ -30,6 +32,12 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepository repositoryUsuario;
+	
+	@Autowired
+	private EmpresaRepository repositoryEmpresa;
+	
+	@Autowired
+	private AvaliacaoRepository repositoryAvaliacao;
 
 	@Autowired
 	private UsuarioService serviceUsuario;
@@ -38,9 +46,23 @@ public class UsuarioController {
 	private UsuarioCadastroService cadastroUsuarioService;
 	
 	@GetMapping
-	public ResponseEntity<List<Usuario>> getAll() {
+	public ResponseEntity<List<Usuario>> getAllUsuarios() {
 
 		return ResponseEntity.ok(repositoryUsuario.findAll());
+
+	};
+	
+	@GetMapping("/empresas")
+	public ResponseEntity<List<Empresa>> getAllEmpresas() {
+
+		return ResponseEntity.ok(repositoryEmpresa.findAll());
+
+	};
+	
+	@GetMapping("/avaliacoes")
+	public ResponseEntity<List<Avaliacao>> getAllAvaliacoes() {
+
+		return ResponseEntity.ok(repositoryAvaliacao.findAll());
 
 	};
 
@@ -53,7 +75,7 @@ public class UsuarioController {
 	};
 	
 	@PostMapping("/empresa")
-	public ResponseEntity<Object> criarEmpresa(Empresa empresa) {
+	public ResponseEntity<Object> criarEmpresa(@RequestBody Empresa empresa) {
 		
 		return serviceUsuario.cadastrarEmpresa(empresa)
 				.map(x -> ResponseEntity.status(201).body(x))
@@ -62,7 +84,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/avaliacao")
-	public ResponseEntity<Object> criarEmpresa(Avaliacao avaliacao) {
+	public ResponseEntity<Object> criarEmpresa(@RequestBody Avaliacao avaliacao) {
 		
 		return serviceUsuario.fazerAvaliacao(avaliacao)
 				.map(x -> ResponseEntity.status(201).body(x))
@@ -80,7 +102,7 @@ public class UsuarioController {
 	@PostMapping("/logar")
 	public ResponseEntity<UsuarioLoginDTO> autentication(@RequestBody Optional<UsuarioLoginDTO> login) {
 		return cadastroUsuarioService.logar(login).map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 	}
 
 }

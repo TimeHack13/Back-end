@@ -39,13 +39,12 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(UsuarioCadastroDTO usuarioCadastroDTO, List<Avaliacao> avaliacao) {
+	public Usuario(UsuarioCadastroDTO usuarioCadastroDTO) {
 		super();
 		this.nome = usuarioCadastroDTO.getNome();
 		this.email = usuarioCadastroDTO.getEmail();
 		this.senha = usuarioCadastroDTO.getSenha();
 		this.avatar = usuarioCadastroDTO.getAvatar();
-		this.avaliacao = avaliacao;
 	}
 
 	public Long getId_usuario() {
