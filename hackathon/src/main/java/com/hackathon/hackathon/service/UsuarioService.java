@@ -27,7 +27,7 @@ public class UsuarioService {
 	@Autowired
 	private AvaliacaoRepository repositoryAvaliacao;
 
-	// Salva um novo produto
+	// Salva um novo usuario
 	public Usuario novoUsuario(Usuario novoUsuario) {
 		return repositoryUsuario.save(novoUsuario);
 	}
@@ -68,7 +68,7 @@ public class UsuarioService {
 	
 	// Fazer avaliação.
 	
-	public Optional<Object> cadastrarEmpresa(Avaliacao novaAvaliacao) {
+	public Optional<Object> fazerAvaliacao(Avaliacao novaAvaliacao) {
 
 		return repositoryAvaliacao.findByTitulo(novaAvaliacao.getTitulo()).map(empresaExistente -> {
 			return Optional.empty();
