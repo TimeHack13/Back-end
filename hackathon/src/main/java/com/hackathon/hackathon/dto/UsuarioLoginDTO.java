@@ -2,27 +2,37 @@ package com.hackathon.hackathon.dto;
 
 public class UsuarioLoginDTO {
 
-	private String apelido;
+	private Long id;
+	private String nome;
 	private String email;
 	private String senha;
-	
+
 	public UsuarioLoginDTO() {
 		super();
 	}
 
-	public UsuarioLoginDTO(String apelido, String email, String senha) {
+	public UsuarioLoginDTO(Long id, String nome, String email, String senha) {
 		super();
-		this.apelido = apelido;
+		this.id = id;
+		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 	}
 
-	public String getApelido() {
-		return apelido;
+	public Long getId() {
+		return id;
 	}
 
-	public void setApelido(String apelido) {
-		this.apelido = apelido;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
@@ -40,6 +50,5 @@ public class UsuarioLoginDTO {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
 
 }

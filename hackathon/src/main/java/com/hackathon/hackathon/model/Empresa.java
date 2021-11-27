@@ -26,7 +26,7 @@ public class Empresa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_empresa;
 
-	private String razãoSocial;
+	private String razaoSocial;
 	private String endereco;
 	private Long pontuacao;
 
@@ -40,15 +40,12 @@ public class Empresa {
 		super();
 	}
 
-	public Empresa(Long id_empresa, String razãoSocial, String endereco, Long pontuacao, Avaliacao avaliacao,
-			Date data) {
+	public Empresa( String razaoSocial, String endereco, Long pontuacao, Avaliacao avaliacao) {
 		super();
-		this.id_empresa = id_empresa;
-		this.razãoSocial = razãoSocial;
+		this.razaoSocial = razaoSocial;
 		this.endereco = endereco;
 		this.pontuacao = pontuacao;
 		this.avaliacao = avaliacao;
-		this.data = data;
 	}
 
 	public Long getId_empresa() {
@@ -59,12 +56,12 @@ public class Empresa {
 		this.id_empresa = id_empresa;
 	}
 
-	public String getRazãoSocial() {
-		return razãoSocial;
+	public String getRazaoSocial() {
+		return razaoSocial;
 	}
 
-	public void setRazãoSocial(String razãoSocial) {
-		this.razãoSocial = razãoSocial;
+	public void setRazaoSocial(String razãoSocial) {
+		this.razaoSocial = razãoSocial;
 	}
 
 	public String getEndereco() {
