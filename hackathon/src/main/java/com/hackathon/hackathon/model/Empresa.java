@@ -3,10 +3,13 @@ package com.hackathon.hackathon.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,26 +28,27 @@ public class Empresa {
 
 	private String razãoSocial;
 	private String endereco;
-	private String cnpj;
+	private Long pontuacao;
+
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	private Avaliacao avaliacao;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
-
-	@OneToMany(mappedBy = "usuario")
-	private List<Vagas> vagas;
 
 	public Empresa() {
 		super();
 	}
 
-	public Empresa(Long id_empresa, String razãoSocial, String endereco, String cnpj, Date data, List<Vagas> vagas) {
+	public Empresa(Long id_empresa, String razãoSocial, String endereco, Long pontuacao, Avaliacao avaliacao,
+			Date data) {
 		super();
 		this.id_empresa = id_empresa;
 		this.razãoSocial = razãoSocial;
 		this.endereco = endereco;
-		this.cnpj = cnpj;
+		this.pontuacao = pontuacao;
+		this.avaliacao = avaliacao;
 		this.data = data;
-		this.vagas = vagas;
 	}
 
 	public Long getId_empresa() {
@@ -71,12 +75,20 @@ public class Empresa {
 		this.endereco = endereco;
 	}
 
-	public String getCnpj() {
-		return cnpj;
+	public Long getPontuacao() {
+		return pontuacao;
 	}
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setPontuacao(Long pontuacao) {
+		this.pontuacao = pontuacao;
+	}
+
+	public Avaliacao getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(Avaliacao avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 
 	public Date getData() {
@@ -85,14 +97,6 @@ public class Empresa {
 
 	public void setData(Date data) {
 		this.data = data;
-	}
-
-	public List<Vagas> getVagas() {
-		return vagas;
-	}
-
-	public void setVagas(List<Vagas> vagas) {
-		this.vagas = vagas;
 	}
 
 }

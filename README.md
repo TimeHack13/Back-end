@@ -1,38 +1,31 @@
 # Back-end
-Back end- portal 
 
+Back end
 
---------------
+---
 
 ## Usuários
+
     - id
-    - apelido
-    - nomeSocial
     - nome
     - Senha
     - Email
     - Avatar
-    - OrintaçãoSex
-    - Idade
-    - Post (1 - n)
-    - Vagas (1 - n)
-    
-## Post
-    - História
+    - Avaliação (1 - n)
+
+## Avaliação
+
+    - id
+    - Descrição
     - CorFundo
     - Titulo
     - UsuarioId (n - 1)
-    
+    - Empresa (n - 1)
+
 ## Empresa
-    - Nome/RazãoSocial
+
+    - id
+    - RazãoSocial
     - Endereço
-    - Vagas (1 - n)
-    - CNPJ
-    
-## Vagas
-    - Titulo
-    - Descrição
-    - Valor/Salário
-    - EmpresaId (n - 1)
-    - UsuárioId (n - 1)
-    
+    - Pontuação
+    - Opinião ()

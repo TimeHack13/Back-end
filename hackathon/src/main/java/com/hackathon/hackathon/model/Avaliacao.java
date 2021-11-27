@@ -1,6 +1,7 @@
 package com.hackathon.hackathon.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,50 +19,55 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "tb_post")
 @Component
-public class Post {
+public class Avaliacao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_post;
+	private Long id_avaliacao;
 
-	private String historia;
+	private String descricao;
 	private int corFundo;
 	private String titulo;
 
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private Usuario usuario;
 
+	@OneToMany(mappedBy = "usuario")
+	private List<Avaliacao> avaliacao;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 
-	public Post() {
+	public Avaliacao() {
 		super();
 	}
 
-	public Post(Long id_post, String historia, int corFundo, String titulo, Usuario usuario, Date data) {
+	public Avaliacao(Long id_avaliacao, String descricao, int corFundo, String titulo, Usuario usuario,
+			List<Avaliacao> avaliacao, Date data) {
 		super();
-		this.id_post = id_post;
-		this.historia = historia;
+		this.id_avaliacao = id_avaliacao;
+		this.descricao = descricao;
 		this.corFundo = corFundo;
 		this.titulo = titulo;
 		this.usuario = usuario;
+		this.avaliacao = avaliacao;
 		this.data = data;
 	}
 
-	public Long getId_post() {
-		return id_post;
+	public Long getId_avaliacao() {
+		return id_avaliacao;
 	}
 
-	public void setId_post(Long id_post) {
-		this.id_post = id_post;
+	public void setId_avaliacao(Long id_avaliacao) {
+		this.id_avaliacao = id_avaliacao;
 	}
 
-	public String getHistoria() {
-		return historia;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setHistoria(String historia) {
-		this.historia = historia;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public int getCorFundo() {
@@ -87,6 +94,14 @@ public class Post {
 		this.usuario = usuario;
 	}
 
+	public List<Avaliacao> getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(List<Avaliacao> avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+
 	public Date getData() {
 		return data;
 	}
@@ -95,4 +110,6 @@ public class Post {
 		this.data = data;
 	}
 
+	
+	
 }
