@@ -48,14 +48,9 @@ public class UsuarioService {
 	// Fazer avaliação.
 	
 	public Optional<Object> fazerAvaliacao(Avaliacao novaAvaliacao) {
-		
-		return repositoryAvaliacao.findByNomeEmpresa(novaAvaliacao.getNomeEmpresa()).map(empresaExistente -> {
-			return Optional.empty();
-						
-		}).orElseGet(() -> {
 
-			return Optional.ofNullable(repositoryAvaliacao.save(novaAvaliacao));
-		});
+		return Optional.ofNullable(repositoryAvaliacao.save(novaAvaliacao));
+
 	}
 
 }
