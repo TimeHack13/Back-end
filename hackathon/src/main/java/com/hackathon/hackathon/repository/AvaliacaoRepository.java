@@ -11,8 +11,10 @@ import com.hackathon.hackathon.model.Avaliacao;
 @Repository
 public interface AvaliacaoRepository  extends JpaRepository<Avaliacao, Long> {
 
-	public Optional<Avaliacao> findByTitulo(String titulo);
+	public Optional<Avaliacao> findByNomeEmpresa(String nomeEmpresa);
 	
-	public List<Avaliacao> findAllByTituloContainingIgnoreCase(String titulo);
+	public List<Avaliacao> findAllByNomeEmpresaContainingIgnoreCase(String nomeEmpresa);
+	
+	public List<Avaliacao> findAllByIdEmpresa(Long idEmpresa);
 	
 }

@@ -1,23 +1,18 @@
 package com.hackathon.hackathon.model;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "tb_post")
+@Table(name = "tb_avaliacao	")
 @Component
 public class Avaliacao {
 
@@ -26,14 +21,20 @@ public class Avaliacao {
 	private Long id_avaliacao;
 
 	private String descricao;
-	private int corFundo;
-	private String titulo;
+	private String nomeEmpresa;
+	private Long pontuacao;
+	private String endereco;
+	private String telefone;
 
-	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	private Usuario usuario;
+	/**
+	 * Id da empresa avaliada.
+	 */
+	private Long idEmpresa;
 
-	@OneToMany(mappedBy = "usuario")
-	private List<Avaliacao> avaliacao;
+	/**
+	 * Id do usuário que fez a avaliação.
+	 */
+	private Long idUsuario;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
@@ -42,16 +43,16 @@ public class Avaliacao {
 		super();
 	}
 
-	public Avaliacao(Long id_avaliacao, String descricao, int corFundo, String titulo, Usuario usuario,
-			List<Avaliacao> avaliacao, Date data) {
+	public Avaliacao(String descricao, String nomeEmpresa, Long pontuacao, String endereco, String telefone,
+			Long idEmpresa, Long idUsuario) {
 		super();
-		this.id_avaliacao = id_avaliacao;
 		this.descricao = descricao;
-		this.corFundo = corFundo;
-		this.titulo = titulo;
-		this.usuario = usuario;
-		this.avaliacao = avaliacao;
-		this.data = data;
+		this.nomeEmpresa = nomeEmpresa;
+		this.pontuacao = pontuacao;
+		this.endereco = endereco;
+		this.telefone = telefone;
+		this.idEmpresa = idEmpresa;
+		this.idUsuario = idUsuario;
 	}
 
 	public Long getId_avaliacao() {
@@ -70,36 +71,52 @@ public class Avaliacao {
 		this.descricao = descricao;
 	}
 
-	public int getCorFundo() {
-		return corFundo;
+	public String getNomeEmpresa() {
+		return nomeEmpresa;
 	}
 
-	public void setCorFundo(int corFundo) {
-		this.corFundo = corFundo;
+	public void setNomeEmpresa(String nomeEmpresa) {
+		this.nomeEmpresa = nomeEmpresa;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public Long getPontuacao() {
+		return pontuacao;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setPontuacao(Long pontuacao) {
+		this.pontuacao = pontuacao;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public String getEndereco() {
+		return endereco;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
-	public List<Avaliacao> getAvaliacao() {
-		return avaliacao;
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setAvaliacao(List<Avaliacao> avaliacao) {
-		this.avaliacao = avaliacao;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Long getIdEmpresa() {
+		return idEmpresa;
+	}
+
+	public void setIdEmpresa(Long idEmpresa) {
+		this.idEmpresa = idEmpresa;
+	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public Date getData() {
@@ -110,6 +127,4 @@ public class Avaliacao {
 		this.data = data;
 	}
 
-	
-	
 }

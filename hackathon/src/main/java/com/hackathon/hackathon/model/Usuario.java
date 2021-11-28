@@ -1,5 +1,6 @@
 package com.hackathon.hackathon.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,10 +27,11 @@ public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
-	private String avatar;
 
-	@OneToMany(mappedBy = "usuario")
-	private List<Avaliacao> avaliacao;
+	/**
+	 * Lista de avaliações do usuario, puxando pelo id.
+	 */
+	private Long idAvaliacao;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
@@ -39,12 +40,11 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(UsuarioCadastroDTO usuarioCadastroDTO) {
+	public Usuario(UsuarioCadastroDTO usuarioDTO) {
 		super();
-		this.nome = usuarioCadastroDTO.getNome();
-		this.email = usuarioCadastroDTO.getEmail();
-		this.senha = usuarioCadastroDTO.getSenha();
-		this.avatar = usuarioCadastroDTO.getAvatar();
+		this.nome = usuarioDTO.getNome();
+		this.email = usuarioDTO.getEmail();
+		this.senha = usuarioDTO.getSenha();
 	}
 
 	public Long getId_usuario() {
@@ -79,21 +79,12 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public String getAvatar() {
-		return avatar;
+	public Long getIdAvaliacao() {
+		return idAvaliacao;
 	}
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
-
-
-	public List<Avaliacao> getPost() {
-		return avaliacao;
-	}
-
-	public void setPost(List<Avaliacao> post) {
-		this.avaliacao = post;
+	public void setIdAvaliacao(Long idAvaliacao) {
+		this.idAvaliacao = idAvaliacao;
 	}
 
 	public Date getData() {

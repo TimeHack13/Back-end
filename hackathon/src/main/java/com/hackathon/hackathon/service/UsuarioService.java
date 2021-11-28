@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hackathon.hackathon.model.Avaliacao;
-import com.hackathon.hackathon.model.Empresa;
 import com.hackathon.hackathon.model.Usuario;
 import com.hackathon.hackathon.repository.AvaliacaoRepository;
-import com.hackathon.hackathon.repository.EmpresaRepository;
 import com.hackathon.hackathon.repository.UsuarioRepository;
 
 @Service
@@ -17,9 +15,6 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository repositoryUsuario;
-
-	@Autowired
-	private EmpresaRepository repositoryEmpresa;
 
 	@Autowired
 	private AvaliacaoRepository repositoryAvaliacao;
@@ -49,31 +44,17 @@ public class UsuarioService {
 		});
 	}
 
-	// Cadastrar uma empresa.
-
-	public Optional<Object> cadastrarEmpresa(Empresa novaEmpresa) {
-
-		return repositoryEmpresa.findByRazaoSocial(novaEmpresa.getRazaoSocial()).map(empresaExistente -> {
-			return Optional.empty();
-		}).orElseGet(() -> {
-
-			Empresa novoEmpresaCadastro = new Empresa();
-
-			return Optional.ofNullable(repositoryEmpresa.save(novoEmpresaCadastro));
-		});
-	}
 	
 	// Fazer avaliação.
 	
 	public Optional<Object> fazerAvaliacao(Avaliacao novaAvaliacao) {
-
-		return repositoryAvaliacao.findByTitulo(novaAvaliacao.getTitulo()).map(empresaExistente -> {
+		
+		return repositoryAvaliacao.findByNomeEmpresa(novaAvaliacao.getNomeEmpresa()).map(empresaExistente -> {
 			return Optional.empty();
+						
 		}).orElseGet(() -> {
 
-			Avaliacao novaAvaliacaoUsuario = new Avaliacao();
-
-			return Optional.ofNullable(repositoryAvaliacao.save(novaAvaliacaoUsuario));
+			return Optional.ofNullable(repositoryAvaliacao.save(novaAvaliacao));
 		});
 	}
 
