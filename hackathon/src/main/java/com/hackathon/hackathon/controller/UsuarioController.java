@@ -104,7 +104,8 @@ public class UsuarioController {
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Object> autentication(@RequestBody UsuarioCadastroDTO usuarioCadastro) {
 		return cadastroUsuarioService.cadastrarUsuario(usuarioCadastro)
-				.map(usuarioCadastrado -> ResponseEntity.status(HttpStatus.CREATED).body(usuarioCadastrado))
+				.map(usuarioCadastrado -> ResponseEntity.status(HttpStatus.CREATED)
+						.body(usuarioCadastrado))
 				.orElse(ResponseEntity.badRequest().build());
 	}
 	

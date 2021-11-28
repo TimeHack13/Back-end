@@ -48,8 +48,20 @@ public class UsuarioService {
 	// Fazer avaliação.
 	
 	public Optional<Object> fazerAvaliacao(Avaliacao novaAvaliacao) {
-
-		return Optional.ofNullable(repositoryAvaliacao.save(novaAvaliacao));
+		
+		repositoryAvaliacao.save(novaAvaliacao);
+		
+		Optional<Usuario> usuario = repositoryUsuario.findById(novaAvaliacao.getIdUsuario());
+		
+		System.out.println(usuario.get().getNome());
+		
+		Long num = novaAvaliacao.getId_avaliacao();
+		
+		usuario.get().setIdAvaliacao(num);
+		
+		repositoryUsuario.save(usuario.get());
+		
+		return Optional.ofNullable(novaAvaliacao);
 
 	}
 
