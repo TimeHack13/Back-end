@@ -32,6 +32,7 @@ public class Usuario {
 	/**
 	 * Lista de avaliações do usuario, puxando pelo id.
 	 */
+	
 	private Long idAvaliacao;
 
 	@Temporal(TemporalType.TIMESTAMP)
